@@ -2,12 +2,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
+import TarjetaClima from "./components/TarjetaClima";
 
 function App() {
   const [ciudad, setCiudad] = useState("Tucuman");
   const [pais, setPais] = useState("ar");
   const [clima, setClima] = useState([]);
-  const [climaGeneral, setClimaGeneral] = useState({});
+  const [climaGeneral, setClimaGeneral] = useState(ciudad, pais);
   useEffect(() => {
     consultarApi();
   }, [ciudad, pais]);
@@ -21,7 +22,10 @@ function App() {
       console.log(dato);
     } catch (error) {}
   };
-
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setClimaGeneral();
+  };
   const selectorCiudad = (e) => {
     setCiudad(e.target.value);
   };
@@ -32,21 +36,21 @@ function App() {
   return (
     <>
       <h1>Clima del mundo</h1>
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Pais</Form.Label>
           <Form.Control
             type="text"
             placeholder="Ingrese Pais"
             onChange={selectorPais}
-            valiu={pais}
+            value={clima.pais}
           />
         </Form.Group>
         <Form.Group
           className="mb-3"
           controlId="formBasicPassword"
           onChange={selectorCiudad}
-          valiu={ciudad}
+          value={clima.ciudad}
         >
           <Form.Label>ciudad</Form.Label>
           <Form.Control type="text" placeholder="Ingrese ciudad" />
@@ -55,6 +59,9 @@ function App() {
           Submit
         </Button>
       </Form>
+      {climaGeneral.map((clima) => (
+        <TarjetaClima clima={clima} />
+      ))}
     </>
   );
 }
