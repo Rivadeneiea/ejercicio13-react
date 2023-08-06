@@ -4,7 +4,10 @@ import Card from "react-bootstrap/Card";
 const TarjetaClima = ({ datosClima }) => {
   console.log(datosClima);
   return (
-    <Card style={{ width: "18rem" }}>
+    <Card
+      style={{ width: "18rem" }}
+      className="container text-center bg-dark text-light mb-5"
+    >
       <Card.Body>
         <Card.Title>{datosClima.name}</Card.Title>
         <Card.Text>pais:{datosClima.sys.country}</Card.Text>

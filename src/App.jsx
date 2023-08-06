@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Form, Button, Container, Card, Spinner } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import TarjetaClima from "./components/TarjetaClima";
+import Footer from "./components/Footer";
 
 function App() {
   const [clima, setClima] = useState({
@@ -47,8 +48,10 @@ function App() {
   return (
     <div>
       <Container className="mainSection">
-        <Card className="my-5">
-          <Card.Header as="h5">clima del mundo</Card.Header>
+        <Card className="my-5 bg-dark text-danger ">
+          <Card.Header as="h5" className="text-center text-light bg-danger">
+            Clima del mundo
+          </Card.Header>
           <Card.Body>
             <Form onSubmit={handleSubmit(onSubmit)}>
               <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -104,6 +107,7 @@ function App() {
           <TarjetaClima datosClima={clima} />
         )}
       </Container>
+      <Footer></Footer>
     </div>
   );
 }
